@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+    <link rel="stylesheet" type="text/css" href="./styles.css" />
+    <title>Document</title>
+</head>
+<body>
+    <main>
+        <h1>Socket do Simulador</h1>
+        <ul class="datas">
+            <li>
+                <strong>Frontal Esquerda: </strong>
+                <p id="FR_L">12</p>
+            </li>
+            <li>
+                <strong>Frontal Direita: </strong>
+                <p id="FR_R">12</p>
+            </li>
+            <li>
+                <strong>Traseira Esquerda: </strong>
+                <p id="RE_L">12</p>
+            </li>
+            <li>
+                <strong>Traseira Direita: </strong>
+                <p id="RE_R">12</p>
+            </li>
+        </ul>
+    </main>
+    
+    <script type="text/javascript">
+        var socket = io('http://localhost:3001');
+
+        function renderData(data){
+            document.getElementById('FR_L').innerHTML = data.FR_L.toFixed(2)
+            document.getElementById('FR_R').innerHTML = data.FR_R.toFixed(2)
+            document.getElementById('RE_L').innerHTML = data.RE_L.toFixed(2)
+            document.getElementById('RE_R').innerHTML = data.RE_R.toFixed(2)
+        }
+
+        socket.on('receivedData', data => {
+            renderData(data)
+        })
+    </script>
+</body>
+</html>
