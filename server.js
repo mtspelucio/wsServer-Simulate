@@ -19,12 +19,12 @@ app.set('view engine', 'html');
 let wellData = {FR_L: 0, FR_R: 0, RE_L: 0, RE_R: 0}
 
 app.use('/', (req, res) => {
-    res.render('index.html')
+    // res.render('index.html')
+    res.send("wellData");
 })
 
 io.on('connection', socket => {
     socket.emit('receivedData', wellData)
-    //console.log(socket.id)
 })
 
 
@@ -41,4 +41,4 @@ wsServer.on('connection', socket => {
 
 server.listen(PORT+1)
 
-console.log(" Server is listening on port " + PORT);
+console.log("Servidor rodando na porta: " + (PORT+1));
